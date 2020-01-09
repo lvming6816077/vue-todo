@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>单文件组件</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/http-vue-loader"></script>
+  <style type="text/css">
+    body {
+      margin:0;
+    }
+    #app {
+      color: #2c3e50;
+      background: linear-gradient(180deg,#2ebf91,#8360c3);
+      min-height: 100vh;
+      display: flex;
+      align-items: center
+    }
+
+    .container {
+      padding: 0 10px;
+      flex-grow: 1;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .app-content {
+        background: #ededed;
+        padding: 16px;
+        padding-top: 0;
+        border-radius: 5px;
+        -webkit-box-shadow: 0 0 30px -5px #2c3e50;
+        box-shadow: 0 0 30px -5px #2c3e50;
+        margin: 16px auto;
+        min-height: 300px
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <div class="container">
+    <div class="app-content">
+      <navheader @change="changePage" :page="currentPage"></navheader>
+      <todo v-show="currentPage == 'todo'"></todo>
+      <recycle v-show="currentPage == 'recycle'"></recycle>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    //定义中央事件总线
+  var EventBus = new Vue();
+
+  // 将中央事件总线赋值到 Vue.prototype 上，这样所有组件都能访问到了
+  Vue.prototype.$EventBus = EventBus;
+
+
+  new Vue({
+    el: '#app',
+    data:{
+      currentPage: 'todo'
+    },
+    components: {
+      navheader: httpVueLoader('./components/navheader.vue'),
+      todo: httpVueLoader('todo.vue'),
+      recycle: httpVueLoader('recycle.vue')
+    },
+    methods:{
+      changePage(val){
+        this.currentPage = val
+      }
+    }
+  })
+</script>
+</body>
+</html>
