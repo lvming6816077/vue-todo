@@ -6,92 +6,93 @@
     <div class="item-content">
       <div class="break-all">{{item.content}}</div>
     </div>
-    <div class="item-delete"></div>
+    <div class="item-delete" @click="deleteItem" title="删除"></div>
   </div>
 </template>
 
 <script>
+  /**
+   * @module TodoItem
+   */
+  module.exports = {
+    name: 'TodoItem',
 
-
-/**
- * @module TodoItem
- */
-module.exports = {
-  name: 'TodoItem',
-
-  props: {
-    /**
-     *  @type TodoItem
-     */
-    item: {
-      type: Object,
-      required: true
-    }
-  },
-  data () {
-    return {
-      isCompleted: false,
-      contentLocal: ''
-    }
-  },
-  computed: {
-
-  },
-
-  methods: {
-    /**
-     * Deletes a todo item
-     */
-    deleteItem () {
-
-      this.$emit('delete',{
-        deletedAt: Date.now(),
-        id: this.item.id
-      })
+    props: {
+      /**
+       *  @type TodoItem
+       */
+      item: {
+        type: Object,
+        required: true
+      }
+    },
+    data() {
+      return {
+        isCompleted: this.item.isCompleted || false
+      }
+    },
+    watch: {
+      isCompleted(val) {
+        this.item.isCompleted = val
+        this.$emit('complete', this.item)
+      }
     },
 
+    methods: {
+      /**
+       * Deletes a todo item
+       */
+      deleteItem() {
+        this.item.deletedAt = Date.now()
+        this.$emit('delete', this.item)
+      }
 
+    }
   }
-}
 </script>
 
 <style>
-.todo-item {
-  display: flex;
+  .todo-item {
+    display: flex;
 
-  align-items: center;
-  margin-bottom: 16px;
-  background: #fff;
-  padding: 10px;
-  border-radius: 5px;
-  position: relative;
-}
-.todo-item.completed {
-  text-decoration: line-through;
-  opacity: .5;
-}
-.item-checkbox .checkbox {
-  cursor: pointer;
-}
-.item-content {
-  flex: 1;
-  padding-left: 10px;
-  padding-right: 30px;
-}
-.item-delete {
-  cursor: pointer;
-  width: 25px;
-  height: 25px;
-  background-image: url('./delete.png');
-  position: absolute;
-  background-size: 60% 60%;
-  
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 50%;
-  right: 11px;
-}
-.item-delete:hover {
-  background-color: #dbdbdb;
-}
+    align-items: center;
+    margin-bottom: 16px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+  }
+
+  .todo-item.completed {
+    text-decoration: line-through;
+    opacity: .5;
+  }
+
+  .item-checkbox .checkbox {
+    cursor: pointer;
+  }
+
+  .item-content {
+    flex: 1;
+    padding-left: 10px;
+    padding-right: 30px;
+  }
+
+  .item-delete {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    background-image: url('./delete.png');
+    position: absolute;
+    background-size: 60% 60%;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    right: 11px;
+  }
+
+  .item-delete:hover {
+    background-color: #dbdbdb;
+  }
 </style>
