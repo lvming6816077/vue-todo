@@ -11,7 +11,7 @@ Vue.prototype.$dataUtils = dataUtils
 new Vue({
   el: '#app',
   data: {
-    currentPage: 'todo'
+    currentPage: 'todo'// 默认为todo页面
   },
   components: {
     navheader: httpVueLoader('./components/navheader.vue'),
@@ -19,7 +19,8 @@ new Vue({
     recycle: httpVueLoader('./views/recycle.vue')
   },
   methods: {
-    changePage (val) {
+    changePage (val) {// 接收到子组件的调用
+      // 改变当前页面
       this.currentPage = val
     }
   }

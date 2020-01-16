@@ -1,36 +1,34 @@
+/**
+ * 创建存储器 基于LocalStorage的封装
+ * 允许存储基于JSON格式的数据
+ */
 export default {
   /**
-   * Get an item from LocalStorage
-   * Allows saving any JSON data
-   * @param {String} key - Key to retrieve data by
-   * @param {*} [fallback] - a fallback value if key is not found
-   * @return {*}
+   * 通过key值获取值
+   * @param {String} key - key值
    */
-  getItem(key, fallback) {
-    try {
-      var item = window.localStorage.getItem(key)
-      return item ? window.JSON.parse(item) : fallback
-    } catch (err) {
-      return fallback
-    }
+  getItem(key) {
+    let item = window.localStorage.getItem(key)
+    // 获取到数据后，直接转换成JSON对象
+    return item ? window.JSON.parse(item) : null
   },
   /**
-   * Sets an item by its key
-   * @param {String} key - Key to save by
-   * @param {*} value - Value to save. Transforms to a JSON string
+   * 通过key值存储数据
+   * @param {String} key - key值
+   * @param {*} value - 需要存储的数据，将会转换成字符串
    */
   setItem(key, value) {
     window.localStorage.setItem(key, window.JSON.stringify(value))
   },
   /**
-   * Remove item by its key
+   * 删除指定key值的数据
    * @param {string} key
    */
   removeItem(key) {
     window.localStorage.removeItem(key)
   },
   /**
-   * Removes all items from storage
+   * 清空当前系统的存储
    */
   clearAllItems() {
     window.localStorage.clear()

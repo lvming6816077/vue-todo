@@ -11,22 +11,20 @@
 </template>
 
 <script>
+  /**
+   * 标题按钮组件
+   */
   module.exports = {
     name: 'navheader',
     props: {
-      /**
-       *  @type TodoItem
-       */
       page: {
         type: String
       }
     },
 
     methods: {
-      /**
-       * Deletes a todo item
-       */
-      changePage(val) {
+      changePage(val) { // 改变当前页面
+        // 通知父组件
         this.$emit('change', val)
       },
       clear() {
@@ -40,18 +38,18 @@
 
 <style>
   .nav-header {
-    padding: 20px;
-    text-align: center;
+    padding: 20px;/* 设置内边距 */
+    text-align: center;/* 设置字体居中 */
   }
 
   .nav-header a {
-    font-weight: 700;
-    color: #2c3e50;
-    cursor: pointer;
+    font-weight: 700;/* 设置字体加粗 */
+    color: #2c3e50;/* 设置字体颜色 */
+    cursor: pointer;/* 设置鼠标移入成小手状 */
   }
 
   .nav-header a.active {
-    color: #42b983
+    color: #42b983/* 设置激活态的字体颜色 */
   }
 
   .nav-header .clear {

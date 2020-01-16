@@ -35,17 +35,17 @@
       this.fetchData()
     },
     watch: {
+      // 监听todoItems
       todoItems(val) {
-        this.storeItems(val)
+        this.storeItems(val)// 一旦有改动立刻调用更新存储
       }
     },
     methods: {
       /**
-       * Fetches all the todo items
+       * 从存储中获取待办事项数据
        */
       fetchData() {
-        // debugger
-        this.todoItems = this.$dataUtils.getItem('todoList', [])
+        this.todoItems = this.$dataUtils.getItem('todoList')
       },
       /**
        * 创建事项
@@ -61,34 +61,41 @@
         // 创建完成后清空输入框内容
         this.newTodoContent = ''
       },
-
+      /**
+       * 删除事项
+       */
       deleteItem(obj) {
-        var newArray = []
-
-        this.todoItems.forEach(function(item) {
-          if (item.id != obj.id) {
-            newArray.push(item)
+        // 以下逻辑为找到对应id的事项，然后删除
+        let newArray = [] // 创建一个新数组
+        this.todoItems.forEach((item)=> {
+          if (item.id != obj.id) {// 对比id
+            newArray.push(item)// 依次push原数组元素，除了需要删除的那个
           }
         })
+        // 赋值新数组
         this.todoItems = newArray
 
-        this.$EventBus.$emit('addDelete', obj)
+        // this.$EventBus.$emit('addDelete', obj)
       },
-
+      /**
+       * 修改事项
+       */
       completeItem(obj) {
-        var newArray = []
-
-        this.todoItems.forEach(function(item) {
+        // 创建一个新数组
+        let newArray = []
+        // 找到对应id的事项，然后替换
+        this.todoItems.forEach((item) =>{
           if (item.id == obj.id) {
             newArray.push(obj)
           } else {
             newArray.push(item)
           }
         })
+        // 赋值新数组
         this.todoItems = newArray
       },
       /**
-       * Persists the list of todo items
+       * 存储事项列表
        */
       storeItems(array) {
         this.$dataUtils.setItem('todoList', array)
