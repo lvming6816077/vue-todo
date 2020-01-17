@@ -9,29 +9,29 @@
     <script src="https://unpkg.com/http-vue-loader"></script>
     <style type="text/css">
       body {
-        margin: 0;
+        margin: 0; /* 清除页面默认边距 */
       }
       #app {
-        color: #2c3e50;
-        background: linear-gradient(180deg, #2ebf91, #8360c3);
-        min-height: 100vh;
-        display: flex;
-        align-items: center
+        color: #2c3e50;/* 设置默认字体颜色 */
+        background: linear-gradient(180deg, #2ebf91, #8360c3);/* 设置线性渐变：从蓝色到紫色 */
+        height: 100vh;/* 设置容器高度为撑满容器 */
+        display: flex;/* 设置容器为弹性布局 */
+        align-items: center/* 设置文字居中 */
       }
       .container {
-        padding: 0 10px;
-        flex-grow: 1;
-        margin: 0 auto;
+        padding: 0 10px;/* 设置内边距 */
+        flex-grow: 1;/* 设置弹性值为了撑满宽度 */
+        margin: 0 auto;/* 设置居中 */
         position: relative;
       }
       .app-content {
-        background: #ededed;
-        padding: 16px;
-        padding-top: 0;
-        border-radius: 5px;
-        box-shadow: 0 0 30px -5px #2c3e50;
-        margin: 16px auto;
-        min-height: 300px
+        background: #ededed;/* 设置背景颜色 */
+        padding: 16px;/* 设置内边距 */
+        padding-top: 0;/* 设置内上边距为0 */
+        border-radius: 5px;/* 设置圆角属性 */
+        box-shadow: 0 0 30px -5px #2c3e50;/* 设置边框阴影 */
+        margin: 16px auto;/* 设置上下边距并左右居中 */
+        min-height: 300px;/* 设置最小高度 */
       }
     </style>
   </head>
@@ -46,7 +46,7 @@
         </div>
       </div>
     </div>
-    <script type="text/javascript" ></script>
+    <script type="text/javascript"></script>
     <script type="module" src="index.js"></script>
   </body>
 </html>

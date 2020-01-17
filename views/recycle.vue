@@ -24,7 +24,9 @@
       }
     },
     mounted() {
+      // 接收到删除事件后，增加对应的逻辑
       this.$EventBus.$on('addDelete', (obj) =>{
+        // 往已删除列表中添加数据
         this.recycleItems.push(obj)
       })
       this.fetchData()

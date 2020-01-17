@@ -29,9 +29,9 @@
       }
     },
     mounted() {
-      this.$EventBus.$on('addRevert', function(obj) {
+      this.$EventBus.$on('addRevert', (obj) =>{
         this.todoItems.push(obj)
-      }.bind(this))
+      })
       this.fetchData()
     },
     watch: {
@@ -74,8 +74,8 @@
         })
         // 赋值新数组
         this.todoItems = newArray
-
-        // this.$EventBus.$emit('addDelete', obj)
+        // 通知已删除事项页面，实时更新已删除数据
+        this.$EventBus.$emit('addDelete', obj)
       },
       /**
        * 修改事项
